@@ -2,6 +2,7 @@
 
 : ${GLOBUS_HOSTNAME:='localhost'}
 : ${GLOBUS_IP_ADDRESS:=''}
+: ${GRIDFTP_PORT:='2811'}
 
 if [ "x$GLOBUS_IP_ADDRESS" == "x" ]
 then
@@ -10,10 +11,12 @@ fi
 
 if [ "x$GLOBUS_USE_LDAP" != "x" ]
 then
-	sed -1 's/^passwd:.*/passwd:	files ldap/' /etc/nsswitch.conf
-	sed -1 's/^shadow:.*/shadow:	files ldap/' /etc/nsswitch.conf
-	sed -1 's/^group:.*/group:	files ldap/' /etc/nsswitch.conf
+	sed -i 's/^passwd:.*/passwd:	files ldap/' /etc/nsswitch.conf
+	sed -i 's/^shadow:.*/shadow:	files ldap/' /etc/nsswitch.conf
+	sed -i 's/^group:.*/group:	files ldap/' /etc/nsswitch.conf
 fi
+
+sed -i 's/^port .*/port '$GRIDFTP_PORT'/' /etc/gridftp.conf
 	
 echo "$GLOBUS_IP_ADDRESS $GLOBUS_HOSTNAME" >> /etc/hosts
 
