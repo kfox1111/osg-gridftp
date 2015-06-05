@@ -29,13 +29,13 @@ if [ ! -f /srv/globus/etc/lcmaps.db ]
 then
 	mv /etc/lcmaps.db /srv/globus/etc/lcmaps.db
 else
-	mv /etc/lcmaps.db /srv/globus/etc/lcmaps.db.new
+	mv -f /etc/lcmaps.db /srv/globus/etc/lcmaps.db.new
 fi
 if [ ! -f /srv/globus/etc/gridftp.conf ]
 then
 	mv /etc/gridftp.conf /srv/globus/etc/gridftp.conf
 else
-	mv /etc/gridftp.conf /srv/globus/etc/gridftp.conf.new
+	mv -f /etc/gridftp.conf /srv/globus/etc/gridftp.conf.new
 fi
 if [ ! -d /srv/globus/etc/grid-security ]
 then
@@ -47,7 +47,7 @@ if [ ! -f /srv/globus/etc/gridftp.d/udt-osg-gridftp.conf ]
 then
 	mv /etc/gridftp.d/udt-osg-gridftp.conf /srv/globus/etc/gridftp.d/udt-osg-gridftp.conf
 else
-	mv /etc/gridftp.d/udt-osg-gridftp.conf /srv/globus/etc/udt-osg-gridftp.conf.newdisabled
+	mv -f /etc/gridftp.d/udt-osg-gridftp.conf /srv/globus/etc/udt-osg-gridftp.conf.newdisabled
 fi
 mkdir -p /etc/lcmaps
 ln -s /etc/lcmaps.db /etc/lcmaps/lcmaps.db
