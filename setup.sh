@@ -12,6 +12,9 @@ then
 	GLOBUS_IP_ADDRESS=`dig +short "$GLOBUS_HOSTNAME"`
 fi
 
+if [ ! -f /etc/.setup.once ]
+then
+
 if [ "x$GLOBUS_USE_LDAP" != "x" ]
 then
 	sed -i 's/^passwd:.*/passwd:	files ldap/' /etc/nsswitch.conf
@@ -60,4 +63,9 @@ ln -s /srv/globus/var/log/gridftp-auth.log /var/log/gridftp-auth.log
 ln -s /srv/globus/var/log/gridftp.log /var/log/gridftp.log
 touch /srv/globus/var/log/gridftp-auth.log
 touch /srv/globus/var/log/gridftp.log
+
+touch /etc/.setup.once
+fi #End setup run once
+
 export LCMAPS_LOG_FILE=/srv/globus/var/log/lcmaps
+
