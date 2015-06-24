@@ -68,4 +68,4 @@ touch /etc/.setup.once
 fi #End setup run once
 
 export LCMAPS_LOG_FILE=/srv/globus/var/log/lcmaps
-
+. /usr/share/osg/sysconfig/globus-gridftp-server
