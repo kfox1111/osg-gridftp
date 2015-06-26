@@ -40,12 +40,17 @@ then
 else
 	mv -f /etc/gridftp.conf /srv/globus/etc/gridftp.conf.new
 fi
-if [ ! -d /srv/globus/etc/grid-security ]
+mkdir -p /srv/globus/etc/grid-security/certificates
+if [ ! -f /srv/globus/etc/grid-security/gsi-authz.conf ]
 then
-	mv /etc/grid-security /srv/globus/etc
-else
-	rm -rf /etc/grid-security
+	cp -a /etc/grid-security/gsi-authz.conf /srv/globus/etc/grid-security/
 fi
+
+if [ ! -d /srv/globus/etc/grid-security/vomsdir ]
+then
+	cp -a /etc/grid-security/vomsdir /srv/globus/etc/grid-security/vomsdir
+fi
+mv /etc/grid-security /etc/grid-security.orig
 if [ ! -f /srv/globus/etc/gridftp.d/udt-osg-gridftp.conf ]
 then
 	mv /etc/gridftp.d/udt-osg-gridftp.conf /srv/globus/etc/gridftp.d/udt-osg-gridftp.conf
