@@ -51,12 +51,14 @@ then
 	cp -a /etc/grid-security/vomsdir /srv/globus/etc/grid-security/vomsdir
 fi
 mv /etc/grid-security /etc/grid-security.orig
-if [ ! -f /srv/globus/etc/gridftp.d/udt-osg-gridftp.conf ]
-then
-	mv /etc/gridftp.d/udt-osg-gridftp.conf /srv/globus/etc/gridftp.d/udt-osg-gridftp.conf
-else
-	mv -f /etc/gridftp.d/udt-osg-gridftp.conf /srv/globus/etc/udt-osg-gridftp.conf.newdisabled
-fi
+for x in udt-osg-gridftp.conf checksum-module.conf; do
+	if [ ! -f /srv/globus/etc/gridftp.d/$x ]
+	then
+		mv /etc/gridftp.d/$x /srv/globus/etc/gridftp.d/$x
+	else
+		mv -f /etc/gridftp.d/$x /srv/globus/etc/$x.newdisabled
+	fi
+done
 mkdir -p /etc/lcmaps
 ln -s /etc/lcmaps.db /etc/lcmaps/lcmaps.db
 rm -rf /etc/gridftp.d
